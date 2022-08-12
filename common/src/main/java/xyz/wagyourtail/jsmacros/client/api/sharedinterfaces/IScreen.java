@@ -1,6 +1,5 @@
 package xyz.wagyourtail.jsmacros.client.api.sharedinterfaces;
 
-import net.minecraft.client.util.math.MatrixStack;
 import xyz.wagyourtail.jsmacros.client.api.helpers.ButtonWidgetHelper;
 import xyz.wagyourtail.jsmacros.client.api.helpers.ItemStackHelper;
 import xyz.wagyourtail.jsmacros.client.api.helpers.TextFieldWidgetHelper;
@@ -236,7 +235,7 @@ public interface IScreen extends IDraw2D<IScreen> {
      * DON'T TOUCH
      * @since 1.4.1
      */
-    void onRenderInternal(MatrixStack matrices, int mouseX, int mouseY, float delta);
+    void onRenderInternal(int mouseX, int mouseY, float delta);
 
     MethodWrapper<IScreen, Object, Object, ?> getOnClose();
 }

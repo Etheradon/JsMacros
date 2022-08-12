@@ -1,6 +1,7 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
 import net.minecraft.client.network.ServerInfo;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
@@ -44,8 +45,8 @@ public class ServerInfoHelper extends BaseHelper<ServerInfo> {
         return new TextHelper(base.version);
     }
 
-    public List<TextHelper> getPlayerListSummary() {
-        return base.playerListSummary.stream().map(TextHelper::new).collect(Collectors.toList());
+    public String getPlayerListSummary() {
+        return base.playerListSummary;
     }
 
     public String resourcePackPolicy() {

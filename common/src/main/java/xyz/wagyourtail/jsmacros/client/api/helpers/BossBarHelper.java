@@ -1,6 +1,6 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
-import net.minecraft.client.class_2840;
+import net.minecraft.entity.boss.BossStatus;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 /**
@@ -8,10 +8,10 @@ import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
  * @since 1.2.1
  */
 @SuppressWarnings("unused")
-public class BossBarHelper extends BaseHelper<class_2840> {
+public class BossBarHelper extends BaseHelper<BossStatus> {
 
-    public BossBarHelper(class_2840 bossBar) {
-        super(bossBar);
+    public BossBarHelper() {
+        super(null);
     }
     
     /**
@@ -19,7 +19,7 @@ public class BossBarHelper extends BaseHelper<class_2840> {
      * @return boss bar uuid.
      */
     public String getUUID() {
-        return base.method_12924().toString();
+        return null;
     }
     
     /**
@@ -27,7 +27,7 @@ public class BossBarHelper extends BaseHelper<class_2840> {
      * @return percent of boss bar remaining.
      */
     public float getPercent() {
-        return base.method_12926();
+        return BossStatus.percent;
     }
     
     /**
@@ -35,7 +35,10 @@ public class BossBarHelper extends BaseHelper<class_2840> {
      * @return boss bar color.
      */
     public String getColor() {
-        return base.method_12927().name();
+        String color = null;
+        if (BossStatus.darkenSky)
+            return "RAINBOW";
+        return "NORMAL";
     }
     
     /**
@@ -43,7 +46,7 @@ public class BossBarHelper extends BaseHelper<class_2840> {
      * @return boss bar notch style.
      */
     public String getStyle() {
-        return base.method_12928().name();
+        return null;
     }
     
     /**
@@ -51,10 +54,10 @@ public class BossBarHelper extends BaseHelper<class_2840> {
      * @return name of boss bar
      */
     public TextHelper getName() {
-        return new TextHelper(base.method_12925());
+        return new TextHelper(BossStatus.name);
     }
     
     public String toString() {
-        return String.format("BossBar:{\"name:\":\"%s\", \"percent\":%f}", base.method_12925().asString(), base.method_12926());
+        return String.format("BossBar:{\"name:\":\"%s\", \"percent\":%f}", BossStatus.name, BossStatus.percent);
     }
 }

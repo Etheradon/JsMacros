@@ -1,8 +1,8 @@
 package xyz.wagyourtail.jsmacros.client.api.classes;
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.LiteralText;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ChatComponentText;
 import xyz.wagyourtail.jsmacros.client.JsMacros;
 import xyz.wagyourtail.jsmacros.client.api.sharedclasses.PositionCommon;
 import xyz.wagyourtail.jsmacros.client.api.sharedinterfaces.IScreen;
@@ -25,7 +25,7 @@ public class ScriptScreen extends BaseScreen {
     private MethodWrapper<PositionCommon.Pos3D, Object, Object, ?> onRender;
     
     public ScriptScreen(String title, boolean dirt) {
-        super(new LiteralText(title), null);
+        super(new ChatComponentText(title), null);
         this.bgStyle = dirt ? 0 : 1;
     }
 
@@ -41,7 +41,7 @@ public class ScriptScreen extends BaseScreen {
      * @since 1.4.0
      */
     public void setParent(IScreen parent) {
-        this.parent = (Screen) parent;
+        this.parent = (GuiScreen) parent;
     }
 
     /**
@@ -63,8 +63,8 @@ public class ScriptScreen extends BaseScreen {
 
         super.render(mouseX, mouseY, delta);
 
-        for (ButtonWidget button : this.buttons) {
-            button.method_891(client, mouseX, mouseY, delta);
+        for (GuiButton button : this.buttons) {
+            button.render(client, mouseX, mouseY);
         }
 
         ((IScreen) this).onRenderInternal(mouseX, mouseY, delta);

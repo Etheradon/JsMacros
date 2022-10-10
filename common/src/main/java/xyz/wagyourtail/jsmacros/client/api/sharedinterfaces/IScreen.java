@@ -1,6 +1,6 @@
 package xyz.wagyourtail.jsmacros.client.api.sharedinterfaces;
 
-import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.GuiButton;
 import xyz.wagyourtail.jsmacros.client.api.helpers.ButtonWidgetHelper;
 import xyz.wagyourtail.jsmacros.client.api.helpers.ItemStackHelper;
 import xyz.wagyourtail.jsmacros.client.api.helpers.TextFieldWidgetHelper;
@@ -242,12 +242,12 @@ public interface IScreen extends IDraw2D<IScreen> {
     /**
      * internal
      */
-    ButtonWidget getFocused();
+    GuiButton getFocused();
 
     /**
      * internal
      */
-    void clickBtn(ButtonWidget btn) throws IOException;
+    void clickBtn(GuiButton btn) throws IOException;
 
     MethodWrapper<IScreen, Object, Object, ?> getOnClose();
 }

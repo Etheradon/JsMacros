@@ -1,18 +1,16 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
-import net.minecraft.item.itemgroup.ItemGroup;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.LiteralText;
+import net.minecraft.item.ItemTool;
+import net.minecraft.nbt.NBTTagCompound;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Wagyourtail
@@ -20,8 +18,8 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("unused")
 public class ItemStackHelper extends BaseHelper<ItemStack> {
-    protected static final MinecraftClient mc = MinecraftClient.getInstance();
-
+    protected static final Minecraft mc = Minecraft.getInstance();
+    
     public ItemStackHelper(ItemStack i) {
         super(i);
     }
@@ -90,7 +88,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public int getCount() {
-        return base.getCount();
+        return base.count;
     }
     
     /**
@@ -105,7 +103,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public NBTElementHelper<?> getNBT() {
-        NbtCompound tag = base.getNbt();
+        NBTTagCompound tag = base.getTag();
         if (tag != null) return NBTElementHelper.resolve(tag);
         else return null;
     }
@@ -115,7 +113,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public String getCreativeTab() {
-        ItemGroup g = base.getItem().getItemGroup();
+        CreativeTabs g = base.getItem().getItemGroup();
         if (g != null)
             return g.getTranslationKey();
         else
@@ -159,7 +157,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public boolean isTool() {
-        return base.getItem() instanceof ToolItem;
+        return base.getItem() instanceof ItemTool;
     }
 
     /**
@@ -167,7 +165,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public boolean isWearable() {
-        return base.getItem() instanceof ArmorItem;
+        return base.getItem() instanceof ItemArmor;
     }
 
     /**
@@ -176,7 +174,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      */
     public int getMiningLevel() {
         if (isTool()) {
-            return Item.ToolMaterialType.valueOf(((ToolItem) base.getItem()).getMaterialAsString()).getMiningLevel();
+            return Item.ToolMaterial.valueOf(((ItemTool) base.getItem()).getMaterialAsString()).getMiningLevel();
         } else {
             return 0;
         }
@@ -190,7 +188,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
     }
     
     public String toString() {
-        return String.format("ItemStack:{\"id\":\"%s\", \"damage\": %d, \"count\": %d}", this.getItemId(), base.getDamage(), base.getCount());
+        return String.format("ItemStack:{\"id\":\"%s\", \"damage\": %d, \"count\": %d}", this.getItemId(), base.getDamage(), base.count);
     }
     
     /**
@@ -217,7 +215,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public boolean isItemEqual(ItemStackHelper ish) {
-        return base.equalsIgnoreNbt(ish.getRaw()) && base.getDamage() == ish.getRaw().getDamage();
+        return base.equalsIgnoreTags(ish.getRaw()) && base.getDamage() == ish.getRaw().getDamage();
     } 
     
     /**
@@ -226,7 +224,7 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return
      */
     public boolean isItemEqual(ItemStack is) {
-        return base.equalsIgnoreNbt(is) && base.getDamage() == is.getDamage();
+        return base.equalsIgnoreTags(is) && base.getDamage() == is.getDamage();
     }
     
     /**

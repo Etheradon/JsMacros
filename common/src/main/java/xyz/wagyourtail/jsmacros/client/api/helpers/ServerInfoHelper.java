@@ -1,16 +1,15 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.util.ChatComponentTranslation;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 /**
  * @since 1.6.5
  */
-public class ServerInfoHelper extends BaseHelper<ServerInfo> {
+public class ServerInfoHelper extends BaseHelper<ServerData> {
 
-    public ServerInfoHelper(ServerInfo base) {
+    public ServerInfoHelper(ServerData base) {
         super(base);
     }
 
@@ -47,7 +46,7 @@ public class ServerInfoHelper extends BaseHelper<ServerInfo> {
     }
 
     public String resourcePackPolicy() {
-        return ((TranslatableText) base.getResourcePack().getName()).getKey();
+        return ((ChatComponentTranslation) base.getResourcePack().getName()).getKey();
     }
 
     public String getIcon() {

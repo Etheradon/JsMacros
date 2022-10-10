@@ -5,6 +5,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 import java.util.HashMap;
@@ -64,7 +65,7 @@ public class BlockDataHelper extends BaseHelper<IBlockState> {
      * @return the translated name of the block. (was string before 1.6.5)
      */
     public TextHelper getName() {
-        return new TextHelper(new LiteralText(b.getTranslatedName()));
+        return new TextHelper(new ChatComponentText(b.getTranslatedName()));
     }
 
     /**

@@ -1,6 +1,7 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
@@ -22,11 +23,11 @@ public class ServerInfoHelper extends BaseHelper<ServerData> {
     }
 
     public TextHelper getPlayerCountLabel() {
-        return new TextHelper(new LiteralText(base.playerCountLabel));
+        return new TextHelper(new ChatComponentText(base.playerCountLabel));
     }
 
     public TextHelper getLabel() {
-        return new TextHelper(new LiteralText(base.label));
+        return new TextHelper(new ChatComponentText(base.label));
     }
 
     public long getPing() {
@@ -38,7 +39,7 @@ public class ServerInfoHelper extends BaseHelper<ServerData> {
     }
 
     public TextHelper getVersion() {
-        return new TextHelper(new LiteralText(base.version));
+        return new TextHelper(new ChatComponentText(base.version));
     }
 
     public String getPlayerListSummary() {

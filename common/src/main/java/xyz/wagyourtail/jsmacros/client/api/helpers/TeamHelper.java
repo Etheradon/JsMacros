@@ -1,8 +1,7 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
 import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Team;
-import net.minecraft.text.LiteralText;
+import net.minecraft.util.ChatComponentText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class TeamHelper extends BaseHelper<ScorePlayerTeam> {
      * @return
      */
     public TextHelper getDisplayName() {
-        return new TextHelper(new LiteralText(base.getName()));
+        return new TextHelper(new ChatComponentText(base.getName()));
     }
     
     /**
@@ -55,7 +54,7 @@ public class TeamHelper extends BaseHelper<ScorePlayerTeam> {
      * @return
      */
     public TextHelper getPrefix() {
-        return new TextHelper(base.getPlayerPrefix());
+        return new TextHelper(new ChatComponentText(base.getPlayerPrefix()));
     }
     
     /**
@@ -63,7 +62,7 @@ public class TeamHelper extends BaseHelper<ScorePlayerTeam> {
      * @return
      */
     public TextHelper getSuffix() {
-        return new TextHelper(base.getNameTagVisibilityRule());
+        return new TextHelper(new ChatComponentText(base.getNameTagVisibilityRule()));
     }
     
     /**

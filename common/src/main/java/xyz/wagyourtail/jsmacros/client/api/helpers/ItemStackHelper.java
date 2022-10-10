@@ -8,6 +8,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 import java.util.List;
@@ -74,14 +75,14 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return was string before 1.6.5
      */
     public TextHelper getDefaultName() {
-        return new TextHelper(new LiteralText(base.getItem().getDisplayName(base)));
+        return new TextHelper(new ChatComponentText(base.getItem().getDisplayName(base)));
     }
     
     /**
      * @return was string before 1.6.5
      */
     public TextHelper getName() {
-        return new TextHelper(new LiteralText(base.getName()));
+        return new TextHelper(new ChatComponentText(base.getName()));
     }
     
     /**

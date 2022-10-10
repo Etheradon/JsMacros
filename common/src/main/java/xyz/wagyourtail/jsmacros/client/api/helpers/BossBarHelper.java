@@ -1,6 +1,7 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
 import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.util.ChatComponentText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 /**
@@ -54,7 +55,7 @@ public class BossBarHelper extends BaseHelper<BossStatus> {
      * @return name of boss bar
      */
     public TextHelper getName() {
-        return new TextHelper(BossStatus.name);
+        return new TextHelper(new ChatComponentText(BossStatus.name));
     }
     
     public String toString() {

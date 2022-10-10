@@ -3,6 +3,7 @@ package xyz.wagyourtail.jsmacros.client.api.classes;
 import net.minecraft.client.gui.screen.ingame.EnchantingScreen;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.screen.EnchantingScreenHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import xyz.wagyourtail.jsmacros.client.api.helpers.TextHelper;
 
@@ -32,7 +33,7 @@ public class EnchantInventory extends Inventory<EnchantingScreen> {
         for (int j = 0; j < 3; ++j) {
             Enchantment enchantment = Enchantment.byIndex(((EnchantingScreenHandler)inventory.screenHandler).enchantmentId[j] & 255);
             if (((EnchantingScreenHandler)inventory.screenHandler).enchantmentId[j] > 0 && (enchantment) != null) {
-                enchants[j] = new TextHelper(enchantment.getTranslatedName((((EnchantingScreenHandler)inventory.screenHandler).enchantmentId[j] & 65280) >> 8));
+                enchants[j] = new TextHelper(new LiteralText(enchantment.getTranslatedName((((EnchantingScreenHandler)inventory.screenHandler).enchantmentId[j] & 65280) >> 8)));
             }
         }
         return enchants;

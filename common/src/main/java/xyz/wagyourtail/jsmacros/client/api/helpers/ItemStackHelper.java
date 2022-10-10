@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.itemgroup.ItemGroup;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.LiteralText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
 import java.util.List;
@@ -75,14 +76,14 @@ public class ItemStackHelper extends BaseHelper<ItemStack> {
      * @return was string before 1.6.5
      */
     public TextHelper getDefaultName() {
-        return new TextHelper(base.getItem().getDisplayName(base));
+        return new TextHelper(new LiteralText(base.getItem().getDisplayName(base)));
     }
     
     /**
      * @return was string before 1.6.5
      */
     public TextHelper getName() {
-        return new TextHelper(base.getName());
+        return new TextHelper(new LiteralText(base.getName()));
     }
     
     /**

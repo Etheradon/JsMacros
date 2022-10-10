@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.state.property.Property;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
 
@@ -64,7 +65,7 @@ public class BlockDataHelper extends BaseHelper<BlockState> {
      * @return the translated name of the block. (was string before 1.6.5)
      */
     public TextHelper getName() {
-        return new TextHelper(b.getTranslatedName());
+        return new TextHelper(new LiteralText(b.getTranslatedName()));
     }
 
     /**

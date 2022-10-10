@@ -1,5 +1,6 @@
 package xyz.wagyourtail.jsmacros.client.api.sharedinterfaces;
 
+import net.minecraft.client.gui.widget.ButtonWidget;
 import xyz.wagyourtail.jsmacros.client.api.helpers.ButtonWidgetHelper;
 import xyz.wagyourtail.jsmacros.client.api.helpers.ItemStackHelper;
 import xyz.wagyourtail.jsmacros.client.api.helpers.TextFieldWidgetHelper;
@@ -8,6 +9,7 @@ import xyz.wagyourtail.jsmacros.client.api.sharedclasses.RenderCommon.Item;
 import xyz.wagyourtail.jsmacros.client.api.sharedclasses.RenderCommon.Rect;
 import xyz.wagyourtail.jsmacros.core.MethodWrapper;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -236,6 +238,16 @@ public interface IScreen extends IDraw2D<IScreen> {
      * @since 1.4.1
      */
     void onRenderInternal(int mouseX, int mouseY, float delta);
+
+    /**
+     * internal
+     */
+    ButtonWidget getFocused();
+
+    /**
+     * internal
+     */
+    void clickBtn(ButtonWidget btn) throws IOException;
 
     MethodWrapper<IScreen, Object, Object, ?> getOnClose();
 }

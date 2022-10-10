@@ -29,7 +29,7 @@ public class TeamHelper extends BaseHelper<Team> {
      * @return
      */
     public TextHelper getDisplayName() {
-        return new TextHelper(base.getDisplayName());
+        return new TextHelper(base.getName());
     }
     
     /**
@@ -45,7 +45,7 @@ public class TeamHelper extends BaseHelper<Team> {
      * @return
      */
     public int getColor() {
-        return base.getColor().getColorIndex();
+        return base.method_12130().getColorIndex();
     }
     
     /**
@@ -93,7 +93,7 @@ public class TeamHelper extends BaseHelper<Team> {
      * @return
      */
     public String nametagVisibility() {
-        return base.getNameTagVisibilityRule().toString();
+        return base.method_12129().toString();
     }
     
     /**

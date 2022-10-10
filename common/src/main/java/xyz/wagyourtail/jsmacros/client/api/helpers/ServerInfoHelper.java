@@ -1,12 +1,8 @@
 package xyz.wagyourtail.jsmacros.client.api.helpers;
 
 import net.minecraft.client.network.ServerInfo;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @since 1.6.5
@@ -65,13 +61,9 @@ public class ServerInfoHelper extends BaseHelper<ServerInfo> {
         return base.isLocal();
     }
 
-    public NBTElementHelper<?> getNbt() {
-        return null;
-    }
-
     @Override
     public String toString() {
-        return "ServerInfoHelper{" + getNbt().asString() + "}";
+        return "ServerInfoHelper{" + getName() + ", " + getAddress() + "}";
     }
 
 }

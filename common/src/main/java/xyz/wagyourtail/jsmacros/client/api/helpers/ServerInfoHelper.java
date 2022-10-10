@@ -26,11 +26,11 @@ public class ServerInfoHelper extends BaseHelper<ServerInfo> {
     }
 
     public TextHelper getPlayerCountLabel() {
-        return new TextHelper(base.playerCountLabel);
+        return new TextHelper(new LiteralText(base.playerCountLabel));
     }
 
     public TextHelper getLabel() {
-        return new TextHelper(base.label);
+        return new TextHelper(new LiteralText(base.label));
     }
 
     public long getPing() {
@@ -42,7 +42,7 @@ public class ServerInfoHelper extends BaseHelper<ServerInfo> {
     }
 
     public TextHelper getVersion() {
-        return new TextHelper(base.version);
+        return new TextHelper(new LiteralText(base.version));
     }
 
     public String getPlayerListSummary() {

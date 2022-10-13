@@ -488,7 +488,7 @@ public class Draw3D {
         RenderSystem.disableTexture();
         RenderSystem.matrixMode(5889);
 
-        RenderSystem.pushMatrix();
+        matrixStack.push();
 
         Camera camera = mc.gameRenderer.getCamera();
         Vec3d camPos = camera.getPos();

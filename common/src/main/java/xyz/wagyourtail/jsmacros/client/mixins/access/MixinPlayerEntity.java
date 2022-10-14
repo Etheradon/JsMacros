@@ -1,6 +1,5 @@
 package xyz.wagyourtail.jsmacros.client.mixins.access;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
@@ -21,7 +20,7 @@ public abstract class MixinPlayerEntity extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "getName", cancellable = true)
     private void getName(CallbackInfoReturnable<Text> cir) {
-        if (getCustomName() != null) {
+        if (!getCustomName().isEmpty()) {
             cir.setReturnValue(new LiteralText(getCustomName()));
         }
     }

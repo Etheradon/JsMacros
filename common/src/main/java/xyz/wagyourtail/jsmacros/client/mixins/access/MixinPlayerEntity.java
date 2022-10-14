@@ -19,7 +19,7 @@ public abstract class MixinPlayerEntity extends EntityLivingBase {
     }
 
     @Inject(at = @At("HEAD"), method = "getName", cancellable = true)
-    private void getName(CallbackInfoReturnable<Text> cir) {
+    private void getName(CallbackInfoReturnable<IChatComponent> cir) {
         if (!getCustomName().isEmpty()) {
             cir.setReturnValue(new ChatComponentText(getCustomName()));
         }

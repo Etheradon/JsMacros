@@ -16,7 +16,6 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.ClickEvent;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.util.Identifier;
 
@@ -73,9 +72,9 @@ public abstract class MixinScreen extends AbstractParentElement implements IScre
     
     @Shadow public int width;
     @Shadow public int height;
-    @Shadow @Final protected Text title;
+    @Shadow @Final protected net.minecraft.text.Text title;
     @Shadow protected MinecraftClient client;
-    @Shadow protected TextRenderer textRenderer;
+    @Shadow public TextRenderer textRenderer;
     
     @Shadow(aliases = {"method_37063", "m_142416_"}) protected abstract <T extends Element & Drawable & Selectable> T addDrawableChild(T drawableElement);
     @Shadow(aliases = {"close", "method_25419", "m_7379_"}) public abstract void onClose();
@@ -531,7 +530,7 @@ public abstract class MixinScreen extends AbstractParentElement implements IScre
     
     @Override
     public String getTitleText() {
-        return title.text.getString();
+        return title.getString();
     }
 
     @Override

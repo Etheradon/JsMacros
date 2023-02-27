@@ -3,16 +3,19 @@ package xyz.wagyourtail.jsmacros.client.api.helpers.world;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
+import xyz.wagyourtail.jsmacros.client.api.classes.math.DoubleArrayIterator;
 import xyz.wagyourtail.jsmacros.client.api.helpers.world.entity.EntityHelper;
 import xyz.wagyourtail.jsmacros.client.api.classes.math.Pos3D;
 import xyz.wagyourtail.jsmacros.core.helpers.BaseHelper;
+
+import java.util.Iterator;
 
 /**
  * @author Wagyourtail
  * @since 1.2.6
  */
 @SuppressWarnings("unused")
-public class BlockPosHelper extends BaseHelper<BlockPos> {
+public class BlockPosHelper extends BaseHelper<BlockPos> implements Iterable<Double> {
     
     public BlockPosHelper(BlockPos b) {
         super(b);
@@ -266,4 +269,10 @@ public class BlockPosHelper extends BaseHelper<BlockPos> {
     public String toString() {
         return String.format("BlockPosHelper:{\"x\": %d, \"y\": %d, \"z\": %d}", base.getX(), base.getY(), base.getZ());
     }
+
+    @Override
+    public Iterator<Double> iterator() {
+        return new DoubleArrayIterator(new double[]{getX(), getY(), getZ()});
+    }
+    
 }

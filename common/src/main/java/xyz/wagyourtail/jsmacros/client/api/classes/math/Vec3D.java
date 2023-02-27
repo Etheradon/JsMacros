@@ -3,11 +3,13 @@ package xyz.wagyourtail.jsmacros.client.api.classes.math;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
 
+import java.util.Iterator;
+
 /**
  * @author Wagyourtail
  * @since 1.2.6 [citation needed]
  */
-public class Vec3D extends Vec2D {
+public class Vec3D extends Vec2D implements Iterable<Double> {
     public double z1;
     public double z2;
 
@@ -234,6 +236,11 @@ public class Vec3D extends Vec2D {
      */
     public Vec3f toMojangFloatVector() {
         return new Vec3f((float) (x2 - x1), (float) (y2 - y1), (float) (z2 - z1));
+    }
+
+    @Override
+    public Iterator<Double> iterator() {
+        return new DoubleArrayIterator(new double[]{x1, y1, z1, x2, y2, z2});
     }
 
 }

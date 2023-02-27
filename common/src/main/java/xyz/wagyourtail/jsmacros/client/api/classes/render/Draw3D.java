@@ -562,7 +562,7 @@ public class Draw3D {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableTexture();
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
 
         Vec3d camPos = mc.gameRenderer.getCamera().getPos();

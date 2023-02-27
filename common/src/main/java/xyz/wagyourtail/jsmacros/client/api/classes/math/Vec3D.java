@@ -9,24 +9,44 @@ import java.util.Iterator;
  * @author Wagyourtail
  * @since 1.2.6 [citation needed]
  */
-public class Vec3D extends Vec2D implements Iterable<Double> {
+public class Vec3D implements Iterable<Double> {
+    public double x1;
+    public double y1;
     public double z1;
+    public double x2;
+    public double y2;
     public double z2;
 
     public Vec3D(double x1, double y1, double z1, double x2, double y2, double z2) {
-        super(x1, y1, x2, y2);
+        this.x1 = x1;
+        this.y1 = y1;
+        this.z1 = z1;
         this.z1 = z1;
         this.z2 = z2;
     }
 
     public Vec3D(Pos3D start, Pos3D end) {
-        super(start, end);
-        this.z1 = start.z;
-        this.z2 = end.z;
+        this(start.x, start.y, start.z, end.x, end.y, end.z);
+    }
+
+    public double getX1() {
+        return x1;
+    }
+
+    public double getY1() {
+        return y1;
     }
 
     public double getZ1() {
         return z1;
+    }
+
+    public double getX2() {
+        return x2;
+    }
+
+    public double getY2() {
+        return y2;
     }
 
     public double getZ2() {
@@ -37,17 +57,14 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
         return z2 - z1;
     }
 
-    @Override
     public Pos3D getStart() {
         return new Pos3D(x1, y1, z1);
     }
 
-    @Override
     public Pos3D getEnd() {
         return new Pos3D(x2, y2, z2);
     }
 
-    @Override
     public double getMagnitude() {
         double dx = x2 - x1;
         double dy = y2 - y1;
@@ -55,7 +72,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
-    @Override
     public double getMagnitudeSq() {
         double dx = x2 - x1;
         double dy = y2 - y1;
@@ -65,18 +81,17 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
 
     public Vec3D add(Vec3D vec) {
         return new Vec3D(
-            this.x1 + vec.x1,
-            this.y1 + vec.y1,
-            this.z1 + vec.z1,
-            this.x2 + vec.x2,
-            this.y2 + vec.y2,
-            this.z2 + vec.z2
+                this.x1 + vec.x1,
+                this.y1 + vec.y1,
+                this.z1 + vec.z1,
+                this.x2 + vec.x2,
+                this.y2 + vec.y2,
+                this.z2 + vec.z2
         );
     }
 
     /**
      * @param pos
-     *
      * @return
      *
      * @since 1.6.4
@@ -87,7 +102,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
 
     /**
      * @param pos
-     *
      * @return
      *
      * @since 1.6.4
@@ -100,7 +114,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
      * @param x
      * @param y
      * @param z
-     *
      * @return
      *
      * @since 1.6.4
@@ -113,7 +126,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
      * @param x
      * @param y
      * @param z
-     *
      * @return
      *
      * @since 1.6.4
@@ -122,7 +134,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
         return new Vec3D(this.x1, this.y1, this.z1, this.x2 + x, this.y2 + y, this.z2 + z);
     }
 
-
     /**
      * @param x1
      * @param y1
@@ -130,7 +141,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
      * @param x2
      * @param y2
      * @param z2
-     *
      * @return
      *
      * @since 1.6.3
@@ -141,12 +151,12 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
 
     public Vec3D multiply(Vec3D vec) {
         return new Vec3D(
-            this.x1 * vec.x1,
-            this.y1 * vec.y1,
-            this.z1 * vec.z1,
-            this.x2 * vec.x2,
-            this.y2 * vec.y2,
-            this.z2 * vec.z2
+                this.x1 * vec.x1,
+                this.y1 * vec.y1,
+                this.z1 * vec.z1,
+                this.x2 * vec.x2,
+                this.y2 * vec.y2,
+                this.z2 * vec.z2
         );
     }
 
@@ -157,7 +167,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
      * @param x2
      * @param y2
      * @param z2
-     *
      * @return
      *
      * @since 1.6.3
@@ -168,12 +177,10 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
 
     /**
      * @param scale
-     *
      * @return
      *
      * @since 1.6.3
      */
-    @Override
     public Vec3D scale(double scale) {
         return new Vec3D(x1 * scale, y1 * scale, z1 * scale, x2 * scale, y2 * scale, z2 * scale);
     }
@@ -183,7 +190,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
      *
      * @since 1.6.5
      */
-    @Override
     public Vec3D normalize() {
         double mag = getMagnitude();
         return new Vec3D(x1 / mag, y1 / mag, z1 / mag, x2 / mag, y2 / mag, z2 / mag);
@@ -204,9 +210,13 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
     }
 
     public double dotProduct(Vec3D vec) {
+        double dx1 = x2 - x1;
+        double dx2 = vec.x2 - vec.x1;
+        double dy1 = y2 - y1;
+        double dy2 = vec.y2 - vec.y1;
         double dz1 = z2 - z1;
         double dz2 = vec.z2 - vec.z1;
-        return super.dotProduct(vec) + dz1 * dz2;
+        return dx1 * dx2 + dy1 * dy2 + dz1 * dz2;
     }
 
     public Vec3D crossProduct(Vec3D vec) {
@@ -219,7 +229,6 @@ public class Vec3D extends Vec2D implements Iterable<Double> {
         return new Vec3D(0, 0, 0, dy1 * dz2 - dz1 * dy2, dz1 * dx2 - dx1 * dz2, dx1 * dy2 - dy1 * dx2);
     }
 
-    @Override
     public Vec3D reverse() {
         return new Vec3D(x2, y2, z2, x1, y1, z1);
     }

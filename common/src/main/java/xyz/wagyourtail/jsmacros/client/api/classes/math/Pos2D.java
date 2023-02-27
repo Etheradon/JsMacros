@@ -6,7 +6,7 @@ import java.util.Iterator;
  * @author Wagyourtail
  * @since 1.2.6 [citation needed]
  */
-public class Pos2D implements  Iterable<Double> {
+public class Pos2D implements Iterable<Double> {
     public static final Pos2D ZERO = new Pos2D(0, 0);
     public double x;
     public double y;

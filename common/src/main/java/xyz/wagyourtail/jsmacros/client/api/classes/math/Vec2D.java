@@ -1,5 +1,7 @@
 package xyz.wagyourtail.jsmacros.client.api.classes.math;
 
+import net.minecraft.util.math.MathHelper;
+
 import java.util.Iterator;
 
 /**
@@ -27,6 +29,11 @@ public class Vec2D implements Iterable<Double> {
         this.y2 = end.y;
     }
 
+    public float getYaw() {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        return (float) -MathHelper.wrapDegrees(Math.toDegrees(Math.atan2(dx, dy)));
+    }
 
     public double getX1() {
         return x1;

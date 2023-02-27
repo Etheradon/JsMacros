@@ -168,7 +168,10 @@ public class Pos3D implements Iterable<Double> {
      * @since 1.8.4
      */
     public Pos3D sub(Pos3D pos) {
-        return new Pos3D(x - pos.x, y - pos.y, z - pos.z);
+        this.x -= pos.x;
+        this.y -= pos.y;
+        this.z -= pos.z;
+        return this;
     }
 
     /**
@@ -180,7 +183,7 @@ public class Pos3D implements Iterable<Double> {
      * @since 1.8.4
      */
     public Pos3D sub(double x, double y, double z) {
-        return new Pos3D(this.x - x, this.y - y, this.z - z);
+        return sub(this.x - x, this.y - y, this.z - z);
     }
 
     public Pos3D sub(BlockPosHelper pos) {
@@ -188,7 +191,7 @@ public class Pos3D implements Iterable<Double> {
     }
 
     public Pos3D multiply(Pos3D pos) {
-        return new Pos3D(x * pos.x, y * pos.y, z * pos.z);
+        return multiply(pos.x, pos.y, pos.z);
     }
 
     /**
@@ -200,7 +203,10 @@ public class Pos3D implements Iterable<Double> {
      * @since 1.6.3
      */
     public Pos3D multiply(double x, double y, double z) {
-        return new Pos3D(this.x * x, this.y * y, this.z * z);
+        this.x *= x;
+        this.y *= y;
+        this.z *= z;
+        return this;
     }
 
     /**
@@ -210,7 +216,7 @@ public class Pos3D implements Iterable<Double> {
      * @since 1.8.4
      */
     public Pos3D divide(Pos3D pos) {
-        return new Pos3D(x / pos.x, y / pos.y, z / pos.z);
+        return divide(pos.x, pos.y, pos.z);
     }
 
     /**
@@ -222,7 +228,10 @@ public class Pos3D implements Iterable<Double> {
      * @since 1.8.4
      */
     public Pos3D divide(double x, double y, double z) {
-        return new Pos3D(this.x / x, this.y / y, this.z / z);
+        this.x /= x;
+        this.y /= y;
+        this.z /= z;
+        return this;
     }
 
     public Pos3D mod(Pos3D pos) {
@@ -246,7 +255,10 @@ public class Pos3D implements Iterable<Double> {
      * @since 1.6.3
      */
     public Pos3D scale(double scale) {
-        return new Pos3D(x * scale, y * scale, z * scale);
+        this.x *= scale;
+        this.y *= scale;
+        this.z *= scale;
+        return this;
     }
 
     public String toString() {
@@ -267,19 +279,19 @@ public class Pos3D implements Iterable<Double> {
     }
 
     public Pos3D abs() {
-        return new Pos3D(Math.abs(x), Math.abs(y), Math.abs(z));
+        return set(Math.abs(x), Math.abs(y), Math.abs(z));
     }
 
     public Pos3D floor() {
-        return new Pos3D(Math.floor(x), Math.floor(y), Math.floor(z));
+        return set(Math.floor(x), Math.floor(y), Math.floor(z));
     }
 
     public Pos3D ceil() {
-        return new Pos3D(Math.ceil(x), Math.ceil(y), Math.ceil(z));
+        return set(Math.ceil(x), Math.ceil(y), Math.ceil(z));
     }
 
     public Pos3D round() {
-        return new Pos3D(Math.round(x), Math.round(y), Math.round(z));
+        return set(Math.round(x), Math.round(y), Math.round(z));
     }
 
     public Pos3D min(Pos3D pos) {

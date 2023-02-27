@@ -12,6 +12,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -21,6 +22,7 @@ import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.integrated.IntegratedServer;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
@@ -31,8 +33,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.LightType;
 import net.minecraft.world.RaycastContext;
+
 import xyz.wagyourtail.jsmacros.client.access.IBossBarHud;
 import xyz.wagyourtail.jsmacros.client.access.IPlayerListHud;
 import xyz.wagyourtail.jsmacros.client.api.classes.RegistryHelper;
@@ -779,6 +783,19 @@ public class FWorld extends BaseLibrary {
         assert mc.world != null;
         return mc.world.getRegistryManager().get(Registry.BIOME_KEY).getId(mc.world.getBiome(new BlockPos(x, 10, z)).value()).toString();
     }
+
+    /**
+     * @param x the x coordinate of the biome
+     * @param y the y coordinate of the biome
+     * @param z the z coordinate of the biome
+     * @return biome at specified location, only works if the block/chunk is loaded.
+     *
+     * @since 1.8.4
+     */
+    public String getBiomeAt(int x, int y, int z) {
+        assert mc.world != null;
+        return mc.world.getRegistryManager().get(Registry.BIOME_KEY).getId(mc.world.getBiome(new BlockPos(x, y, z)).value()).toString();
+    }
     
     /**
      * @since 1.2.7
@@ -880,4 +897,36 @@ public class FWorld extends BaseLibrary {
     public double getServer15MAverageTPS() {
         return server15MAverageTPS;
     }
+
+    /**
+     * @since 1.8.4
+     * @return the raw minecraft client world.
+     */
+    public ClientWorld getRawWorld() {
+        return mc.world;
+    }
+
+    /**
+     * @since 1.8.4
+     * @return the raw minecraft server world if it's loaded, {@code null} otherwise.
+     */
+    public ServerWorld getRawServerWorld() {
+        if (mc.isIntegratedServerRunning()) {
+            return mc.getServer().getPlayerManager().getPlayer(mc.player.getUuid()).getWorld();
+        }
+        return null;
+    }
+
+    /**
+     * @since 1.8.4
+     * @param name the identifier of the world
+     * @return the raw minecraft server world with the given name if it's loaded, {@code null} otherwise.
+     */
+    public ServerWorld getRawServerWorld(String name) {
+        if (mc.isIntegratedServerRunning()) {
+            return mc.getServer().getWorld(RegistryKey.of(Registry.WORLD_KEY, RegistryHelper.parseIdentifier(name)));
+        }
+        return null;
+    }
+    
 }

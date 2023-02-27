@@ -10,10 +10,12 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -166,6 +168,16 @@ public class Inventory<T extends HandledScreen<?>> {
     public Inventory<T> dropSlot(int slot, boolean stack) {
         man.clickSlot(syncId, slot, stack ? 1 : 0, SlotActionType.THROW, player);
         return this;
+    }
+
+    /**
+     * Tries to sync the inventory with the server by sending an invalid packet (be careful with
+     * servers with anti-cheat plugins) and thus forcing the server to send a new inventory packet.
+     *
+     * @since 1.8.4
+     */
+    public void sync() {
+        mc.getNetworkHandler().sendPacket(new ClickSlotC2SPacket(syncId, -1, 0, 2, SlotActionType.QUICK_MOVE, ItemStack.EMPTY, new Int2ObjectOpenHashMap<>()));
     }
 
     /**

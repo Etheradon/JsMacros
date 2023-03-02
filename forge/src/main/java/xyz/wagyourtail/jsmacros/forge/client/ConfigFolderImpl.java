@@ -8,7 +8,9 @@ import java.io.File;
 public class ConfigFolderImpl implements ConfigFolder {
     @Override
     public File getFolder() {
-        return new File(MinecraftClient.getInstance().runDirectory, "config/jsMacros");
+        File directory = MinecraftClient.getInstance().runDirectory;
+        directory = ".".equals(directory.getName()) ? directory.getParentFile() : directory;
+        return new File(directory, "config/jsMacros");
     }
 
 }

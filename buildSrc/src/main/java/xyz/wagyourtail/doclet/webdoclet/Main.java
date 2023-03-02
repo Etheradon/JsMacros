@@ -68,8 +68,9 @@ public class Main implements Doclet {
         treeUtils = environment.getDocTrees();
         types = environment.getTypeUtils();
         elementUtils = environment.getElementUtils();
-
-        File outDir = new File(OutputDirectory.outputDir, Version.version);
+        int dashIndex = Version.version.indexOf('-');
+        String version = dashIndex == -1 ? Version.version : Version.version.substring(0, dashIndex);
+        File outDir = new File(OutputDirectory.outputDir, version);
 
         try {
             if (!outDir.exists() && !outDir.mkdirs()) {

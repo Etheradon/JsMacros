@@ -30,6 +30,9 @@ jobs:
             const archives_base_name = file.toString().split("\n").filter(e => e.trim().startsWith("archives_base_name"))[0].split("=")[1].trim();
             return `${archives_base_name}-${mod_version}`;
 
+      - name: Create dist directory
+        run: mkdir -p dist
+
       - name: Zip source code
         run: zip -r "./dist/${{ steps.fname.outputs.result }}-source.zip" .
 
